@@ -1,11 +1,12 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * A class to hold details of audio tracks.
  * Individual tracks may be played.
  * 
- * @author David J. Barnes and Michael Kölling
- * @version 2016.02.29
+ * @author David J. Barnes and Michael Kölling, Michael Biondi
+ * @version 2024.10.01
  */
 public class MusicOrganizer
 {
@@ -15,7 +16,8 @@ public class MusicOrganizer
     private MusicPlayer player;
     // A reader that can read music files and load them as tracks.
     private TrackReader reader;
-
+    // A randomizer.
+    private Random random;
     /**
      * Create a MusicOrganizer
      */
@@ -24,6 +26,7 @@ public class MusicOrganizer
         tracks = new ArrayList<>();
         player = new MusicPlayer();
         reader = new TrackReader();
+        random = new Random();
         readLibrary("../audio");
         System.out.println("Music library loaded. " + getNumberOfTracks() + " tracks.");
         System.out.println();
@@ -124,6 +127,17 @@ public class MusicOrganizer
     {
         if(tracks.size() > 0) {
             player.startPlaying(tracks.get(0).getFilename());
+        }
+    }
+    
+    /**
+     * Play one random track in the collection.
+     */
+    public void playRandom()
+    {
+        int index = random.nextInt(tracks.size());
+        if(tracks.size() > 0) {
+            player.startPlaying(tracks.get(index).getFilename());
         }
     }
     
