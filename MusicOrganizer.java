@@ -142,6 +142,19 @@ public class MusicOrganizer
     }
     
     /**
+     * Play all tracks in the collection in a random order.
+     */
+    public void shuffle()
+    {
+        ArrayList<Track> tracksNotPlayed = new ArrayList<Track>(tracks);
+        while(tracksNotPlayed.size() > 0) {
+            int index = random.nextInt(tracksNotPlayed.size());
+            player.playSample(tracks.get(index).getFilename());
+            tracksNotPlayed.remove(index);
+        }
+    }
+    
+    /**
      * Stop the player.
      */
     public void stopPlaying()
